@@ -1,0 +1,10 @@
+data/*
+!data/.gitkeep
+weights/*
+!weights/.gitkeep
+*.npy
+*.npz
+*.pth
+*.zip
+__pycache__/
+.idea/
