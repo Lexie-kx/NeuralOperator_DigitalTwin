@@ -1,15 +1,32 @@
-# 🌊 NeuralOperator_DigitalTwin: Physics-Informed Surrogate for Fluid Dynamics
+# NeuralOperator_DigitalTwin
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat&logo=PyTorch&logoColor=white)](https://pytorch.org/)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 
-基于 **本征正交分解 (POD)** 与 **物理信息神经网络 (PINO)** 的极速流场数字孪生代理模型体系。
+基于 POD 降维与神经网络回归的二维流场代理模型实验。
 
 ## 项目摘要 (Abstract)
-本项目采用 **POD-DeepONet** 架构，利用本征正交分解 (POD) 提取空间特征，通过深度算子网络映射物理参数到流场演化过程。为解决物理属性突变带来的梯度冲突及显存溢出 (OOM) 问题，模型在离线阶段使用有限差分法预计算 POD 基底的空间导数，以极低的计算开销引入 PINO 质量守恒约束。
-
+本项目主要探索如何利用本征正交分解（Proper Orthogonal Decomposition，POD）对高维 CFD 流场进行降维，并通过神经网络学习物理参数或工况信息与 POD 模态系数之间的映射，最后利用预测得到的模态系数重构完整流场。
+在变密度、变黏度的圆柱绕流实验中，项目进一步加入了不可压缩流体连续性方程约束，用于观察物理约束是否能够改善预测结果的物理一致性。
 ---
+## 数据集
+实验数据主要来自 CFDBench。
+本项目使用了两类经典二维流动问题：
+顶盖驱动方腔流；
+圆柱绕流。
+根据实验目的，项目进一步分为三个阶段。
 
+## 第一阶段：顶盖驱动方腔流
+## 1 数据说明
+
+第一阶段使用顶盖驱动方腔流数据。主要读取各个工况目录中的：
+u.npy
+当前代码按照 64 × 64 网格处理数据。
+数据路径在代码中默认写为：
+DATA_DIR = r"D:\cavity"
+运行时需要修改为实际数据所在位置。
+
+## 2 
 ## 算法架构 (System Architecture)
 
 项目采用统一的 **POD-DeepONet** 核心架构，但在不同阶段针对物理需求进行了模块化演进：
