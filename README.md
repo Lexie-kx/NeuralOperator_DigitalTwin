@@ -5,12 +5,12 @@
 
 基于 **本征正交分解 (POD)** 与 **物理信息神经网络 (PINO)** 的极速流场数字孪生代理模型体系。
 
-## 🎯 项目摘要 (Abstract)
+## 项目摘要 (Abstract)
 本项目采用 **POD-DeepONet** 架构，利用本征正交分解 (POD) 提取空间特征，通过深度算子网络映射物理参数到流场演化过程。为解决物理属性突变带来的梯度冲突及显存溢出 (OOM) 问题，模型在离线阶段使用有限差分法预计算 POD 基底的空间导数，以极低的计算开销引入 PINO 质量守恒约束。
 
 ---
 
-## 🏗️ 算法架构 (System Architecture)
+## 算法架构 (System Architecture)
 
 项目采用统一的 **POD-DeepONet** 核心架构，但在不同阶段针对物理需求进行了模块化演进：
 
@@ -29,7 +29,7 @@
 
 ---
 
-## 🏆 实验演进与数据预处理说明 (Phases & Preprocessing)
+## 实验演进与数据预处理说明 (Phases & Preprocessing)
 
 ### Phase 1: 顶盖驱动流 (Lid-driven Cavity Flow)
 - **任务目标**：验证模型对封闭空间内单涡旋结构的特征提取能力。
@@ -63,7 +63,7 @@
   ![PINO 物理约束效果](results/pino_u_comparison.png)
 
 ---
-## 🚧 当前局限与痛点剖析 (Current Limitations & Bottlenecks)
+## 当前局限与痛点剖析 (Current Limitations & Bottlenecks)
 
 ### 1. 硬件算力与显存的制约
 由于目前缺乏高性能 GPU 服务器支持，所有实验均在本地民用级显卡上运行。这导致模型训练时无法采用更大的 Batch Size，且网络深度为了避开显存限制而被迫作出了大量妥协，直接限制了模型的非线性表征能力。
